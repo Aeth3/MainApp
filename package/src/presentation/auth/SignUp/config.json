@@ -1,0 +1,32 @@
+{
+    "SignUpFields": [
+        {
+            "label": "First name",
+            "placeholder": "First name",
+            "name": "first_name",
+            "secure": false,
+            "required": true
+        },
+        {
+            "label": "Last name",
+            "placeholder": "Last name",
+            "name": "last_name",
+            "secure": false,
+            "required": true
+        },
+        {
+            "label": "Email",
+            "placeholder": "Email",
+            "name": "email",
+            "secure": false,
+            "required": true
+        },
+        {
+            "label": "Password",
+            "placeholder": "New password",
+            "name": "password",
+            "secure": true,
+            "required": true
+        }
+    ]
+}

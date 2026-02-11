@@ -1,0 +1,85 @@
+{
+    "enableDrawer": true,
+    "user_data": {
+        "id": "7f05b02f-e878-4824-b4f1-97062f15018d",
+        "email": "test@gmail.com",
+        "banned_until": null,
+        "created_at": "2025-11-03 14:53:20.174662+00",
+        "confirmed_at": "2025-11-03 16:11:17.666003+00",
+        "confirmation_sent_at": "2025-11-03 16:10:51.719646+00",
+        "is_anonymous": false,
+        "is_sso_user": false,
+        "invited_at": null,
+        "last_sign_in_at": "2025-11-14 08:27:26.976424+00",
+        "phone": null,
+        "raw_app_meta_data": {
+            "provider": "email",
+            "providers": [
+                "email"
+            ]
+        },
+        "raw_user_meta_data": {
+            "sub": "7f05b02f-e878-4824-b4f1-97062f15018d",
+            "email": "test@gmail.com",
+            "last_name": "user",
+            "first_name": "test",
+            "email_verified": true,
+            "phone_verified": false
+        },
+        "updated_at": "2025-12-21 07:26:18.911722+00",
+        "providers": [
+            "email"
+        ]
+    },
+    "loginConfig": {
+        "LoginFields": [
+            {
+                "label": "Email",
+                "placeholder": "Mobile number or email",
+                "name": "email",
+                "secure": false,
+                "required": true
+            },
+            {
+                "label": "Password",
+                "placeholder": "Password",
+                "name": "password",
+                "secure": true,
+                "required": true
+            }
+        ],
+        "appName": "MAIU.DEV"
+    },
+    "signUpConfig": {
+        "SignUpFields": [
+            {
+                "label": "First name",
+                "placeholder": "First name",
+                "name": "first_name",
+                "secure": false,
+                "required": true
+            },
+            {
+                "label": "Last name",
+                "placeholder": "Last name",
+                "name": "last_name",
+                "secure": false,
+                "required": true
+            },
+            {
+                "label": "Email",
+                "placeholder": "Email",
+                "name": "email",
+                "secure": false,
+                "required": true
+            },
+            {
+                "label": "Password",
+                "placeholder": "New password",
+                "name": "password",
+                "secure": true,
+                "required": true
+            }
+        ]
+    }
+}

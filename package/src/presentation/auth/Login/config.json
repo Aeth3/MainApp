@@ -1,0 +1,19 @@
+{
+    "LoginFields": [
+        {
+            "label": "Email",
+            "placeholder": "Mobile number or email",
+            "name": "email",
+            "secure": false,
+            "required": true
+        },
+        {
+            "label": "Password",
+            "placeholder": "Password",
+            "name": "password",
+            "secure": true,
+            "required": true
+        }
+    ],
+    "appName": "MAIU.DEV"
+}

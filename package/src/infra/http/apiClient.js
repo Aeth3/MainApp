@@ -1,0 +1,79 @@
+import axios from "axios";
+import {
+  API_BASE_URL,
+  API_TIMEOUT,
+  SUPABASE_URL,
+  HTTP_BASE_TARGET,
+} from "@env";
+
+let accessTokenProvider = async () => null;
+
+export const setAccessTokenProvider = (provider) => {
+  accessTokenProvider = typeof provider === "function" ? provider : async () => null;
+};
+
+const normalizeBaseTarget = (value) => {
+  const normalized = String(value || "").trim().toLowerCase();
+  return normalized === "supabase" ? "supabase" : "api";
+};
+
+const resolveBaseUrl = () => {
+  const target = normalizeBaseTarget(HTTP_BASE_TARGET);
+
+  if (target === "supabase" && SUPABASE_URL) {
+    return SUPABASE_URL;
+  }
+
+  if (target === "api" && API_BASE_URL) {
+    return API_BASE_URL;
+  }
+
+  return SUPABASE_URL || API_BASE_URL || "";
+};
+
+export const ACTIVE_HTTP_BASE_TARGET = normalizeBaseTarget(HTTP_BASE_TARGET);
+export const ACTIVE_HTTP_BASE_URL = resolveBaseUrl();
+
+if (!ACTIVE_HTTP_BASE_URL) {
+  // Keep app running but make misconfiguration visible in logs.
+  console.warn(
+    "[apiClient] Missing base URL. Set HTTP_BASE_TARGET and matching API_BASE_URL/SUPABASE_URL in .env."
+  );
+}
+
+const apiClient = axios.create({
+  baseURL: ACTIVE_HTTP_BASE_URL,
+  timeout: Number(API_TIMEOUT),
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+apiClient.interceptors.request.use(
+  async (config) => {
+    const token = await accessTokenProvider();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+apiClient.interceptors.response.use(
+  (response) => response.data,
+  (error) => {
+    const normalizedError = {
+      status: error.response?.status,
+      message:
+        error.response?.data?.message ||
+        error.message ||
+        "Network error",
+      data: error.response?.data,
+    };
+
+    return Promise.reject(normalizedError);
+  }
+);
+
+export default apiClient;

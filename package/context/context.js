@@ -1,0 +1,109 @@
+// context/context.js
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { clearSession, getSession } from "../services/storageService";
+import { createTable, dropTable } from '../lib/dbCreator';
+import { insertNewHouseholds, logTableColumns } from '../lib/dbHelper';
+import { IS_DEMO_MODE } from "../src/composition/authSession";
+;
+
+const GlobalContext = createContext();
+
+export const ContextProvider = ({ children }) => {
+  const [auth, setAuth] = useState(undefined); // undefined until restoreSession completes
+  const [loading, setLoading] = useState(true);
+  const [isDbReady, setIsDbReady] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [modalInfo, setModalInfo] = useState({
+    show: false,
+    title: "",
+    message: "",
+    autoNavigate: false,
+  });
+
+  // --- Bootstrap (init DB + restore session) ---
+  useEffect(() => {
+    const bootstrapAsync = async () => {
+      try {
+        await Promise.all([initDatabase(), restoreSession()]);
+      } catch (e) {
+        console.error("Bootstrap failed:", e);
+        setModalInfo({
+          show: true,
+          title: "Startup Error",
+          message: "The app failed to initialize properly.",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+    bootstrapAsync();
+  }, []);
+
+  // --- Initialize SQLite ---
+  const initDatabase = async () => {
+    try {
+      // DROP TABLE
+      // dropTable('tbl_household_records')
+
+      // CREATE TABLE
+      // await createTable(
+      //   'tbl_sample',
+      //   `
+      //   id INTEGER PRIMARY KEY AUTOINCREMENT,
+      //   `
+      // );
+
+      // LOG table columns
+      // logTableColumns('tbl_household_records')
+
+      setIsDbReady(true);
+      console.log("Database initialized.");
+    } catch (error) {
+      console.error("DB Init Error:", error);
+    }
+  };
+
+  // --- Restore Session ---
+  const restoreSession = async () => {
+    try {
+      const session = await getSession();
+      console.log("Session restored:", session);
+      const hasDemoToken =
+        typeof session?.access_token === "string" &&
+        session.access_token.startsWith("demo_access_");
+
+      if (!IS_DEMO_MODE && hasDemoToken) {
+        await clearSession();
+        setAuth(null);
+        return;
+      }
+
+      if (session?.user) {
+        setAuth(session.user);
+      } else {
+        setAuth(null);
+      }
+    } catch (error) {
+      console.error("Session Restore Error:", error);
+      setAuth(null);
+    }
+  };
+
+  return (
+    <GlobalContext.Provider value={{
+      auth,
+      setAuth,
+      loading,
+      isDbReady,
+      currentPage,
+      setCurrentPage,
+      modalInfo,
+      setModalInfo,
+      setLoading,
+    }}>
+      {children}
+    </GlobalContext.Provider>
+  );
+};
+
+export const useGlobal = () => useContext(GlobalContext);

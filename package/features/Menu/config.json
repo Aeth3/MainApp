@@ -1,0 +1,48 @@
+{
+    "menuItems": [
+        {
+            "title": "Friends",
+            "icon": "faUserFriends",
+            "action": "userFriends"
+        },
+        {
+            "title": "Groups",
+            "icon": "faUsers",
+            "action": "users"
+        },
+        {
+            "title": "Marketplace",
+            "icon": "faStore",
+            "action": "store"
+        },
+        {
+            "title": "Memories",
+            "icon": "faClock",
+            "action": "clock"
+        },
+        {
+            "title": "Saved",
+            "icon": "faBookmark",
+            "action": "bookmark"
+        }
+    ],
+    "icons": [
+        {
+            "name": "faSearch",
+            "action": "search",
+            "size": 20
+        },
+        {
+            "name": "faMessage",
+            "action": "message",
+            "size": 20
+        }
+    ],
+    "sections": [
+        {
+            "id": "header",
+            "type": "header"
+        }
+    ],
+    "title": "Menu"
+}

@@ -1,0 +1,307 @@
+{
+    "homeContainerStyles": {
+        "paddingBottom": 80
+    },
+    "sections": [
+        {
+            "id": "header",
+            "type": "header"
+        },
+        {
+            "id": "swiper",
+            "type": "swiper"
+        }
+    ],
+    "stories": [
+        {
+            "id": "add",
+            "name": "Add Story",
+            "isAddButton": true
+        },
+        {
+            "id": "1",
+            "name": "Marvin",
+            "image": "https://randomuser.me/api/portraits/men/32.jpg"
+        },
+        {
+            "id": "2",
+            "name": "Lara",
+            "image": "https://randomuser.me/api/portraits/women/45.jpg"
+        },
+        {
+            "id": "3",
+            "name": "John",
+            "image": "https://randomuser.me/api/portraits/men/22.jpg"
+        },
+        {
+            "id": "4",
+            "name": "Nina",
+            "image": "https://randomuser.me/api/portraits/women/10.jpg"
+        },
+        {
+            "id": "5",
+            "name": "Carl",
+            "image": "https://randomuser.me/api/portraits/men/77.jpg"
+        }
+    ],
+    "title": "PathFriends",
+    "titleLogo": "https://www.strunkmedia.com/wp-content/uploads/2018/05/bigstock-Print-163213010.png",
+    "icons": [
+        {
+            "name": "faSearch",
+            "action": "search",
+            "size": 20
+        },
+        {
+            "name": "faMessage",
+            "action": "message",
+            "size": 20
+        }
+    ],
+    "menuIcons": [
+        {
+            "name": "faCog",
+            "action": "settings",
+            "size": 20
+        },
+        {
+            "name": "faSearch",
+            "action": "search",
+            "size": 20
+        }
+    ],
+    "secondaryIcons": [
+        {
+            "name": "faHome",
+            "size": 20,
+            "action": "home",
+            "type": "icon",
+            "image": null
+        },
+        {
+            "name": "faVideo",
+            "size": 20,
+            "action": "videos",
+            "type": "icon",
+            "image": null
+        },
+        {
+            "name": "faUsers",
+            "size": 20,
+            "action": "friends",
+            "type": "icon",
+            "image": null
+        },
+        {
+            "name": "faUser",
+            "size": 20,
+            "action": "profile",
+            "type": "icon",
+            "image": null
+        },
+        {
+            "name": "faBell",
+            "size": 20,
+            "action": "notification",
+            "type": "icon",
+            "image": null
+        },
+        {
+            "name": "menu",
+            "size": 20,
+            "action": "menu",
+            "type": "image",
+            "image": "https://i.kym-cdn.com/entries/icons/original/000/047/549/kurt_angle_meme.jpg"
+        }
+    ],
+    "profilePicture": "https://i.kym-cdn.com/entries/icons/original/000/047/549/kurt_angle_meme.jpg",
+    "posts": [
+        {
+            "id": 1,
+            "profileImage": "https://cdn2.thecatapi.com/images/4s4.jpg",
+            "name": "Tyrese Gibson",
+            "verified": true,
+            "time": "22h",
+            "caption": "WOW... Btw, our community is learning AI and building together in this private Telegram group https://t.me/...",
+            "postImage": "https://i.pinimg.com/originals/59/54/b4/5954b408c66525ad932faa693a647e3f.jpg",
+            "reactions": "4.1K",
+            "comments": "419",
+            "shares": "518",
+            "views": "2.1M"
+        },
+        {
+            "id": 2,
+            "profileImage": "https://randomuser.me/api/portraits/women/10.jpg",
+            "name": "Nina Lopez",
+            "verified": false,
+            "time": "1d",
+            "caption": "Just finished my first AI model 🧠🔥",
+            "postImage": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2",
+            "reactions": "2.8K",
+            "comments": "134",
+            "shares": "57",
+            "views": "760K"
+        }
+    ],
+    "pages": [
+        {
+            "id": "home",
+            "type": "home"
+        },
+        {
+            "id": "videos",
+            "type": "videos"
+        },
+        {
+            "id": "friends",
+            "type": "friends"
+        },
+        {
+            "id": "profile",
+            "type": "profile"
+        },
+        {
+            "id": "notification",
+            "type": "notification"
+        },
+        {
+            "id": "menu",
+            "type": "menu"
+        }
+    ],
+    "homeSections": [
+        {
+            "id": "composer",
+            "type": "composer"
+        },
+        {
+            "id": "stories",
+            "type": "stories"
+        },
+        {
+            "id": "feed",
+            "type": "feed"
+        }
+    ],
+    "menuSections": [
+        {
+            "id": "header",
+            "type": "header"
+        },
+        {
+            "id": "profileCapsule",
+            "type": "profileCapsule"
+        },
+        {
+            "id": "shortcuts",
+            "type": "shortcuts"
+        },
+        {
+            "id": "grid",
+            "type": "grid"
+        },
+        {
+            "id": "settings",
+            "type": "settings"
+        },
+        {
+            "id": "logout",
+            "type": "logout"
+        }
+    ],
+    "profileCapsuleIcon": "faChevronCircleRight",
+    "shortcutsTitle": "Your shortcuts",
+    "shortcuts": [
+        {
+            "id": 1,
+            "name": "A&J Mobile",
+            "icon": "https://attractmorematches.com/wp-content/uploads/2023/10/Screenshot-2023-10-18-at-5.08.47-PM.png",
+            "action": "profile1"
+        },
+        {
+            "id": 2,
+            "name": "Maayuman",
+            "icon": "https://tse1.mm.bing.net/th/id/OIP.Z16b3E5IDkx78IpQobQfhgHaHa?cb=ucfimgc2&w=626&h=626&rs=1&pid=ImgDetMain&o=7&rm=3",
+            "action": "profile2"
+        }
+    ],
+    "gridItems": [
+        {
+            "label": "Memories",
+            "icon": "faClock",
+            "action": "memories"
+        },
+        {
+            "label": "Saved",
+            "icon": "faBookmark",
+            "action": "saved"
+        },
+        {
+            "label": "Groups",
+            "icon": "faUsers",
+            "action": "groups"
+        },
+        {
+            "label": "Reels",
+            "icon": "faFilm",
+            "color": "#E04A4A",
+            "action": "reels"
+        },
+        {
+            "label": "Marketplace",
+            "icon": "faStore",
+            "action": "marketplace"
+        },
+        {
+            "label": "Friends (299 online)",
+            "icon": "faUserFriends",
+            "action": "friends"
+        },
+        {
+            "label": "Feeds",
+            "icon": "faNewspaper",
+            "action": "feeds"
+        },
+        {
+            "label": "Dating",
+            "icon": "faHeart",
+            "color": "#E84393",
+            "action": "dating"
+        }
+    ],
+    "settingsItems": [
+        {
+            "icon": "faQuestionCircle",
+            "title": "Help & Support",
+            "content": "Here you can get help..."
+        },
+        {
+            "icon": "faCog",
+            "title": "Settings & Privacy",
+            "content": "Adjust your settings here..."
+        },
+        {
+            "icon": "faInfoCircle",
+            "title": "Also from Meta",
+            "content": "Other Meta services..."
+        }
+    ],
+    "reelsData": [
+        {
+            "video": "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
+            "username": "John Doe",
+            "avatar": "https://i.pravatar.cc/300",
+            "description": "Enjoying the beach vibes 🌊☀️",
+            "likes": "12K",
+            "comments": "430"
+        },
+        {
+            "video": "https://samplelib.com/lib/preview/mp4/sample-10s.mp4",
+            "username": "Jane Smith",
+            "avatar": "https://i.pravatar.cc/150",
+            "description": "Night ride 🏍️💨",
+            "likes": "8.4K",
+            "comments": "200"
+        }
+    ]
+}
