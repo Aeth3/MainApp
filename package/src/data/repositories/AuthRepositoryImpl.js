@@ -2,36 +2,28 @@ import { supabase } from "../../../lib/supabase";
 import { AuthRepository } from "../../domain/repositories/AuthRepository";
 import { createSession } from "../../domain/entities/Session";
 import { createUser } from "../../domain/entities/User";
+import {
+  validateSupabaseAuthResponse,
+  extractSupabaseUserMetadata,
+} from "../../contracts/api/supabaseAuth.contract";
+import { isNetworkError } from "../../contracts/errors/ApiErrors";
 
 const mapSupabaseUser = (user) => {
   if (!user) return null;
 
-  const first_name =
-    user?.user_metadata?.first_name ||
-    user?.raw_user_meta_data?.first_name ||
-    "";
-  const last_name =
-    user?.user_metadata?.last_name ||
-    user?.raw_user_meta_data?.last_name ||
-    "";
+  const metadata = extractSupabaseUserMetadata(user);
 
   return createUser({
     id: user.id,
     email: user.email,
-    first_name,
-    last_name,
-    raw_user_meta_data: user.raw_user_meta_data || user.user_metadata || {},
+    first_name: metadata.first_name,
+    last_name: metadata.last_name,
+    raw_user_meta_data: metadata,
   });
 };
 
 const normalizeNetworkError = (error) => {
-  const message = String(error?.message || "");
-  const isNetworkError =
-    message.includes("Network request failed") ||
-    message.toLowerCase().includes("fetch failed") ||
-    message.toLowerCase().includes("network");
-
-  if (!isNetworkError) return null;
+  if (!isNetworkError(error)) return null;
 
   return new Error(
     "Unable to reach Supabase. Check emulator internet, SUPABASE_URL/SUPABASE_KEY in .env, then rebuild with Metro cache reset."
@@ -41,12 +33,15 @@ const normalizeNetworkError = (error) => {
 export class AuthRepositoryImpl extends AuthRepository {
   async signInWithPassword({ email, password }) {
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      const response = await supabase.auth.signInWithPassword({ email, password });
 
-      if (error) {
-        throw new Error(error.message || "Sign in failed");
+      // Validate response structure according to contract
+      const validation = validateSupabaseAuthResponse(response);
+      if (!validation.valid) {
+        throw new Error(validation.error);
       }
 
+      const { data } = response;
       const user = mapSupabaseUser(data?.user);
       const session = createSession({
         access_token: data?.session?.access_token,
@@ -64,7 +59,7 @@ export class AuthRepositoryImpl extends AuthRepository {
 
   async signUp({ email, password, first_name, last_name }) {
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const response = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -75,17 +70,19 @@ export class AuthRepositoryImpl extends AuthRepository {
         },
       });
 
-      if (error) {
-        throw new Error(error.message || "Sign up failed");
+      // Validate response structure according to contract
+      const validation = validateSupabaseAuthResponse(response);
+      if (!validation.valid) {
+        throw new Error(validation.error);
       }
 
-      const user = mapSupabaseUser(data?.user);
+      const { data } = response;
       const session = data?.session
         ? createSession({
-            access_token: data?.session?.access_token,
-            refresh_token: data?.session?.refresh_token,
-            user,
-          })
+          access_token: data?.session?.access_token,
+          refresh_token: data?.session?.refresh_token,
+          user,
+        })
         : null;
 
       return { user, session };
