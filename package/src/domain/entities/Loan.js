@@ -1,5 +1,15 @@
 import { ok, fail } from "../shared/result";
 
+export const LOAN_STATUSES = Object.freeze({
+  PENDING: "pending",
+  ACTIVE: "active",
+  COMPLETED: "completed",
+  DEFAULTED: "defaulted",
+  CANCELLED: "cancelled",
+});
+
+const VALID_STATUS_VALUES = Object.values(LOAN_STATUSES);
+
 export class Loan {
   constructor({ id, amount, term, borrower, dueDate, status, createdAt, updatedAt, pending = false } = {}) {
     this.id = id;
@@ -29,6 +39,8 @@ export class Loan {
     if (!borrower) return fail("VALIDATION_ERROR", "Borrower is required.");
     if (!Number.isFinite(amount)) return fail("VALIDATION_ERROR", "Amount is required.");
     if (!dueDate) return fail("VALIDATION_ERROR", "Due date is required.");
+    if (!VALID_STATUS_VALUES.includes(status))
+      return fail("VALIDATION_ERROR", `Invalid status "${status}". Must be one of: ${VALID_STATUS_VALUES.join(", ")}.`);
 
     const payload = { borrower, amount, dueDate, status };
     if (term != null && Number.isFinite(term)) payload.term = term;

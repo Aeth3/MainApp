@@ -12,6 +12,9 @@ import {
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { COLORS, FONTS } from "package/src/legacyApp";
+import { LOAN_STATUSES } from "../../../domain/entities/Loan";
+
+const STATUS_OPTIONS = Object.values(LOAN_STATUSES);
 
 const LoanFormModal = ({
     visible,
@@ -120,13 +123,31 @@ const LoanFormModal = ({
 
                         <View style={styles.field}>
                             <Text style={styles.label}>Status</Text>
-                            <TextInput
-                                style={styles.input}
-                                placeholder="pending"
-                                placeholderTextColor={COLORS.textLight}
-                                value={values.status}
-                                onChangeText={(text) => update("status", text)}
-                            />
+                            <View style={styles.statusRow}>
+                                {STATUS_OPTIONS.map((option) => {
+                                    const selected = values.status === option;
+                                    return (
+                                        <TouchableOpacity
+                                            key={option}
+                                            activeOpacity={0.8}
+                                            style={[
+                                                styles.statusPill,
+                                                selected && styles.statusPillSelected,
+                                            ]}
+                                            onPress={() => update("status", option)}
+                                        >
+                                            <Text
+                                                style={[
+                                                    styles.statusPillText,
+                                                    selected && styles.statusPillTextSelected,
+                                                ]}
+                                            >
+                                                {option.charAt(0).toUpperCase() + option.slice(1)}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    );
+                                })}
+                            </View>
                         </View>
 
                         <View style={styles.field}>
@@ -218,6 +239,30 @@ const styles = StyleSheet.create({
     },
     placeholderText: {
         color: COLORS.textLight,
+    },
+    statusRow: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+        gap: 8,
+    },
+    statusPill: {
+        paddingHorizontal: 14,
+        paddingVertical: 8,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: COLORS.borderColor,
+        backgroundColor: COLORS.white,
+    },
+    statusPillSelected: {
+        backgroundColor: COLORS.primary,
+        borderColor: COLORS.primary,
+    },
+    statusPillText: {
+        ...FONTS.fontSm,
+        color: COLORS.text,
+    },
+    statusPillTextSelected: {
+        color: COLORS.white,
     },
     actions: {
         flexDirection: "row",

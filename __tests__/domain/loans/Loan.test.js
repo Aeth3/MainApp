@@ -1,4 +1,4 @@
-import { Loan } from "../../../package/src/domain/entities/Loan";
+import { Loan, LOAN_STATUSES } from "../../../package/src/domain/entities/Loan";
 
 describe("Loan entity", () => {
     // ── validateInput ──────────────────────────────────────────────────────
@@ -93,6 +93,35 @@ describe("Loan entity", () => {
 
             expect(result.ok).toBe(false);
             expect(result.error.code).toBe("VALIDATION_ERROR");
+        });
+
+        it("fails when status is not a valid predefined value", () => {
+            const result = Loan.validateInput({
+                borrower: "Frank",
+                amount: "2000",
+                dueDate: "2026-09-01",
+                status: "unknown",
+            });
+
+            expect(result.ok).toBe(false);
+            expect(result.error).toEqual({
+                code: "VALIDATION_ERROR",
+                message: expect.stringContaining("Invalid status"),
+            });
+        });
+
+        it("accepts all valid LOAN_STATUSES values", () => {
+            Object.values(LOAN_STATUSES).forEach((status) => {
+                const result = Loan.validateInput({
+                    borrower: "Grace",
+                    amount: "1000",
+                    dueDate: "2026-10-01",
+                    status,
+                });
+
+                expect(result.ok).toBe(true);
+                expect(result.value.status).toBe(status);
+            });
         });
     });
 
