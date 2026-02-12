@@ -1,6 +1,6 @@
 import { FlatList } from "react-native";
 import Screen from "../../../components/layout/Screen";
-import { useMenuController } from "./controller/MenuController";
+import { useMenuController } from "./controllers/MenuController";
 
 
 export default function MenuScreen() {

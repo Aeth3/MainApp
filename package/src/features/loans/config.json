@@ -40,7 +40,7 @@
                     "value": "poblacion"
                 }
             ],
-            "default": "libertad",
+            "default": 1,
             "disabled": true,
             "label": "Barangay",
             "preserveOnClear": true
@@ -70,7 +70,7 @@
                     "value": "purok_3"
                 }
             ],
-            "default": "",
+            "default": 0,
             "disabled": false,
             "label": "Purok",
             "preserveOnClear": false

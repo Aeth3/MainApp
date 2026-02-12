@@ -1,4 +1,4 @@
-import { ok, fail } from "package/src/shared/result";
+import { ok, fail } from "package/src/domain/shared/result";
 
 export const makeUpdateLoan = ({ loanRepository }) => {
     return async (id, loanData) => {

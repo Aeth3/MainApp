@@ -9,7 +9,7 @@ const loadAuthRepositoryImplModule = () => {
   const verifyOtp = jest.fn();
   const updateUser = jest.fn();
 
-  jest.doMock("../../../package/lib/supabase", () => ({
+  jest.doMock("../../../package/src/infra/supabase/supabaseClient", () => ({
     supabase: {
       auth: {
         signInWithPassword,

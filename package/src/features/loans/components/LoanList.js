@@ -14,13 +14,15 @@ const STATUS_COLORS = {
   overdue: COLORS.danger,
 };
 
-const LoanCard = ({ loan, onPress }) => {
+const LoanCard = ({ loan, onPress, onLongPress }) => {
   const statusColor = STATUS_COLORS[loan.status] || "#6B7280";
 
   return (
     <TouchableOpacity
       activeOpacity={0.85}
       onPress={() => onPress?.(loan)}
+      onLongPress={() => onLongPress?.(loan)}
+      delayLongPress={300}
       style={styles.card}
     >
       <View style={styles.row}>
@@ -51,14 +53,14 @@ const LoanCard = ({ loan, onPress }) => {
   );
 };
 
-const LoanList = ({ loans = [], onPressItem }) => {
+const LoanList = ({ loans = [], onPressItem, onLongPressItem }) => {
   return (
     <FlatList
       data={loans}
       keyExtractor={(item) => item.id.toString()}
       contentContainerStyle={styles.list}
       renderItem={({ item }) => (
-        <LoanCard loan={item} onPress={onPressItem} />
+        <LoanCard loan={item} onPress={onPressItem} onLongPress={onLongPressItem} />
       )}
       showsVerticalScrollIndicator={false}
       ListEmptyComponent={<EmptyState />}

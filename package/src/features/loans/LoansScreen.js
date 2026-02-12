@@ -12,5 +12,6 @@ export default function LoansScreen() {
     return <Screen style={{ padding: 12 }}>
         <Builder components={config.components} config={config} props={builderProps} />
         {builderProps.filterSheet.Sheet}
+        {builderProps.loanFormModal}
     </Screen>
 }

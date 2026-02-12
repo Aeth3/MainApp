@@ -1,7 +1,7 @@
 import { loanRepository } from "../data/repositories/LoanRepositoryImpl";
 import { makeGetLoans } from "../domain/usecases/loans/GetLoans";
 import { makeGetLoanById } from "../domain/usecases/loans/GetLoanById";
-import makeCreateLoan from "../domain/usecases/loans/createLoan";
+import { makeCreateLoan } from "../domain/usecases/loans/CreateLoan";
 import { makeDeleteLoan } from "../domain/usecases/loans/DeleteLoan";
 import { makeUpdateLoan } from "../domain/usecases/loans/UpdateLoan";
 

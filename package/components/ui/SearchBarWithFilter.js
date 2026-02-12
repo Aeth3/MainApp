@@ -49,12 +49,18 @@ export const FiltersSheet = ({ filters, filtersState, setFiltersState }) => {
   const ref = useRef();
   const [localFilters, setLocalFilters] = useState({});
 
-  const open = () => {
+  const safeFilters = Array.isArray(filters) ? filters : [];
+
+  const getInitialFilters = () => {
     const initial = {};
-    filters.forEach((f) => {
+    safeFilters.forEach((f) => {
       initial[f.key] = filtersState?.[f.key] ?? f.default;
     });
-    setLocalFilters(initial);
+    return initial;
+  };
+
+  const open = () => {
+    setLocalFilters(getInitialFilters());
     ref.current?.open();
   };
 
@@ -65,9 +71,18 @@ export const FiltersSheet = ({ filters, filtersState, setFiltersState }) => {
 
   const clear = () => {
     const cleared = {};
-    filters.forEach((f) => {
-      if (f.type === "range") cleared[f.key] = [f.min, f.max];
-      else cleared[f.key] = "";
+    safeFilters.forEach((f) => {
+      if (f.preserveOnClear) {
+        cleared[f.key] = filtersState?.[f.key] ?? f.default;
+        return;
+      }
+
+      if (f.type === "range") {
+        cleared[f.key] = Array.isArray(f.default) ? f.default : [f.min, f.max];
+        return;
+      }
+
+      cleared[f.key] = f.default ?? "";
     });
     setLocalFilters(cleared);
     setFiltersState(cleared);
@@ -106,7 +121,7 @@ export const FiltersSheet = ({ filters, filtersState, setFiltersState }) => {
             <Text style={styles.sheetTitle}>Filters</Text>
           </View>
 
-          {filters.map((item) => {
+          {safeFilters.map((item) => {
             if (item.type === "dropdown") {
               return (
                 <View key={item.key} style={styles.fieldCard}>
@@ -127,6 +142,27 @@ export const FiltersSheet = ({ filters, filtersState, setFiltersState }) => {
               );
             }
 
+            if (item.type === "text") {
+              return (
+                <View key={item.key} style={styles.fieldCard}>
+                  <Text style={styles.fieldLabel}>{item.label}</Text>
+                  <TextInput
+                    editable={!Boolean(item.disabled)}
+                    style={[
+                      styles.textField,
+                      Boolean(item.disabled) && { opacity: 0.6 },
+                    ]}
+                    placeholder={item.placeholder || ""}
+                    placeholderTextColor={COLORS.textLight}
+                    value={String(localFilters[item.key] ?? "")}
+                    onChangeText={(text) =>
+                      setLocalFilters((p) => ({ ...p, [item.key]: text }))
+                    }
+                  />
+                </View>
+              );
+            }
+
             if (item.type === "range") {
               return (
                 <View key={item.key} style={styles.fieldCard}>
@@ -135,6 +171,8 @@ export const FiltersSheet = ({ filters, filtersState, setFiltersState }) => {
                     <Text style={styles.rangeValue}>{getRangeValue(item)}</Text>
                   </View>
                   <MultiSlider
+                    enabledOne={!Boolean(item.disabled)}
+                    enabledTwo={!Boolean(item.disabled)}
                     values={
                       Array.isArray(localFilters[item.key])
                         ? localFilters[item.key]
@@ -225,6 +263,14 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     padding: 12,
     marginBottom: 12,
+  },
+  textField: {
+    borderWidth: 1,
+    borderColor: "#E3E9F4",
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    height: 44,
+    color: COLORS.text,
   },
   fieldLabel: {
     ...FONTS.h6,

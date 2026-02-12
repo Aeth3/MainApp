@@ -1,5 +1,5 @@
-import { ok, fail } from "package/src/shared/result";
-export default function makeCreateLoan({ loanRepository }) {
+import { ok, fail } from "package/src/domain/shared/result";
+export const makeCreateLoan = ({ loanRepository }) => {
     return async (data) => {
         try {
             const loan = await loanRepository.createLoan(data);

@@ -1,4 +1,4 @@
-import { supabase } from "../../../lib/supabase";
+import { supabase } from "../../infra/supabase/supabaseClient";
 import { AuthRepository } from "../../domain/repositories/AuthRepository";
 import { createSession } from "../../domain/entities/Session";
 import { createUser } from "../../domain/entities/User";
@@ -77,6 +77,7 @@ export class AuthRepositoryImpl extends AuthRepository {
       }
 
       const { data } = response;
+      const user = mapSupabaseUser(data?.user);
       const session = data?.session
         ? createSession({
           access_token: data?.session?.access_token,

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { postSignUp } from "../models/SignUpModel";
+import { signUp } from "../../../../composition/authSession";
 import { useNavigation } from "@react-navigation/native";
 import { useGlobal } from "../../../../../context/context";
 
@@ -24,10 +24,10 @@ export const useSignUpController = () => {
         });
         return;
       }
-      const response = await postSignUp({ email, password, first_name, last_name });
+      const result = await signUp({ email, password, first_name, last_name });
 
-      if (!response.success) {
-        const message = response.error?.toLowerCase?.() || "";
+      if (!result?.ok) {
+        const message = (result?.error?.message || "").toLowerCase();
         if (message.includes("already registered")) {
           setModalInfo({
             show: true,
@@ -39,7 +39,7 @@ export const useSignUpController = () => {
           setModalInfo({
             show: true,
             title: "Sign Up Failed",
-            message: response.error || "An unexpected error occurred.",
+            message: result?.error?.message || "An unexpected error occurred.",
             autoNavigate: false,
           });
         }

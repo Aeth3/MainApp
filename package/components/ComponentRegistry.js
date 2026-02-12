@@ -100,7 +100,13 @@ export const componentRegistry = {
             }
         />
     ),
-    loanlist: (config, { props }) => <LoanList loans={props?.loans} />,
+    loanlist: (config, { props }) => (
+        <LoanList
+            loans={props?.loans}
+            onPressItem={props?.onPressLoan}
+            onLongPressItem={props?.onLongPressLoan}
+        />
+    ),
     headertitle: (config) => <HeaderTitle title={config.headerTitle} />,
     floatingaddbutton: (config, { props }) => <FloatingAddButton onPress={props?.handlePressAddButton} alignment={config.addButtonAlignment} />
 };
