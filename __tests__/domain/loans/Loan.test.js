@@ -175,7 +175,7 @@ describe("Loan entity", () => {
         it("handles empty input without throwing", () => {
             const loan = Loan.fromDTO();
             expect(loan).toBeInstanceOf(Loan);
-            expect(loan.id).toBeUndefined();
+            expect(loan.id).toBeNull();
         });
     });
 

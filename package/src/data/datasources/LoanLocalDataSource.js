@@ -33,6 +33,8 @@ export const getAllLoans = async () => {
     const { rows } = await executeSql(
         `SELECT * FROM ${LOANS_TABLE} ORDER BY created_at DESC`
     );
+    console.log("rows", rows);
+
     return rows;
 };
 

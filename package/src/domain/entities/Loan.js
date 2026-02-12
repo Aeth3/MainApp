@@ -59,10 +59,12 @@ export class Loan {
   }
 
   static fromDTO(raw = {}) {
+    const localId = raw.local_id || raw.localId || null;
+    const serverId = raw.server_id || raw.serverId || null;
     return new Loan({
-      id: raw.id ?? raw._id,
-      localId: raw.local_id || raw.localId || null,
-      serverId: raw.server_id || raw.serverId || null,
+      id: raw.id ?? raw._id ?? serverId ?? localId,
+      localId,
+      serverId,
       amount: raw.amount,
       term: raw.term,
       borrower: raw.borrower,

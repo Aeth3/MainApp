@@ -28,6 +28,10 @@ export const useLoansController = () => {
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [editingLoanId, setEditingLoanId] = useState(null);
 
+    useEffect(() => {
+        console.log("loans", loans);
+
+    }, [loans])
     const filterSheet = FiltersSheet({
         filters: config.filters,
         filtersState,
