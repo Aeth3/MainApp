@@ -6,7 +6,7 @@ import { COLORS } from "package/src/legacyApp";
 import { LegacyButton } from "package/src/legacyApp";
 import { useActionHandlers } from "../global/actionHandlers";
 import { useAuth } from "../src/presentation/hooks/useAuth";
-
+import BottomNavigator from "./BottomNavigator";
 const Drawer = createDrawerNavigator();
 
 export default function DrawerNavigator() {
@@ -29,7 +29,7 @@ export default function DrawerNavigator() {
         headerStyle: {
           backgroundColor: "transparent",
         },
-        headerTintColor: COLORS.primary,
+        headerTintColor: COLORS.primary3,
         headerTitleStyle: {
           fontWeight: "600",
         },

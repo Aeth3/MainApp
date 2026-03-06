@@ -6,6 +6,7 @@ import LeafletMap from "../components/ui/LeafletMap";
 import { StackNavigator } from "../navigators/AppNavigator";
 import Entry from "@features/auth/Home/Entry";
 import LoansScreen from "@features/loans/LoansScreen"
+import BottomNavigator from "../navigators/BottomNavigator";
 
 export const drawerRoutes = [
     // {
@@ -29,7 +30,7 @@ export const drawerRoutes = [
     {
         name: "HomeScreen",
         label: "Home",
-        component: StackNavigator,
+        component: BottomNavigator,
         icon: "home", // optional FontAwesome icon name
         hasHeader: false,
         // children: [

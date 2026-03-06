@@ -1,4 +1,4 @@
-package com.starterapp
+package com.novusoft.hotelapp
 
 import android.app.Application
 import com.facebook.react.PackageList
