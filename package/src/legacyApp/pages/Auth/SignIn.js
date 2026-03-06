@@ -70,10 +70,10 @@ const SignIn = ({
                             colors={['#F7F5FF', 'rgba(255,255,255,0)']}
                             style={styles.bottomGradient}
                         />
-                        {/* <Image
+                        <Image
                             style={styles.logo}
                             source={IMAGES.appLogo}
-                        /> */}
+                        />
                         <Image
                             style={styles.shape}
                             source={IMAGES.loginShape}

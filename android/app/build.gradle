@@ -77,9 +77,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.novusoft.hotelapp"
+    namespace "com.starterapp"
     defaultConfig {
-        applicationId "com.novusoft.hotelapp"
+        applicationId "com.starterapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
